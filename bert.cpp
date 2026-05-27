@@ -1083,13 +1083,12 @@ void bert_eval_batch(
         ggml_cgraph *gf = bert_build(ctx, ctx0, tokens, N);
 
         ggml_graph_compute_with_ctx(ctx0, gf, n_threads);
-// we can get result from the graph directly
-            struct ggml_tensor *res = gf->nodes[gf->n_nodes - 1];
-            struct ggml_tensor *embeddings = gf->nodes[gf->n_nodes - 2];
+        // The last node in the graph is the final normalized embedding output
+        struct ggml_tensor *embeddings_tensor = gf->nodes[gf->n_nodes - 1];
 
-            if (!mem_req_mode)
-            {
-                memcpy(batch_embeddings[ba], (float *)ggml_get_data(embeddings), sizeof(float) * n_embd);
+        if (!mem_req_mode)
+        {
+            memcpy(batch_embeddings[ba], (float *)ggml_get_data(embeddings_tensor), sizeof(float) * n_embd);
             }
             else
             {
