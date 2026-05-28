@@ -174,7 +174,7 @@ class BertConvert:
             sys.exit()
 
         gguf_writer.add_name(dir_model.name)
-        gguf_writer.add_source_hf_repo(hf_repo)
+        gguf_writer.add_source_repo_url(hf_repo)
         gguf_writer.add_tensor_data_layout("")
         gguf_writer.add_context_length(ctx_length)
         gguf_writer.add_embedding_length(hparams["hidden_size"])
