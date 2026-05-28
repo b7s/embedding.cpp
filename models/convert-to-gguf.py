@@ -194,7 +194,7 @@ class BertConvert:
         ):
             if "type" in hparams["rope_scaling"]:
                 if hparams["rope_scaling"]["type"] == "linear":
-                    gguf_writer.add_rope_scale_linear(hparams["rope_scaling"]["factor"])
+                    gguf_writer.add_rope_scaling_factor(hparams["rope_scaling"]["factor"])
 
     def convert_tokenizer(self):
         hparams = self.hparams
