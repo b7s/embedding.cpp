@@ -19,6 +19,13 @@
 #include <thread>
 #include <algorithm>
 
+// ggml API compatibility: older ggml versions use 'enum ggml_backend',
+// newer versions typedef it as 'ggml_backend_type'.
+// Provide a fallback typedef so bert.cpp compiles with both APIs.
+#ifndef ggml_backend_type
+typedef enum ggml_backend ggml_backend_type;
+#endif
+
 // default hparams (all-MiniLM-L6-v2)
 struct bert_hparams
 {
